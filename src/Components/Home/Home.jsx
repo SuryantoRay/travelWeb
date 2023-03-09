@@ -68,14 +68,14 @@ const Home = () => {
 
                 <div className="homeFooterIcons flex">
                     <div className="rightIcons">
-                        <FiFacebook />
-                        <AiOutlineInstagram />
-                        <FaTripadvisor />
+                        <FiFacebook className="icon"/>
+                        <AiOutlineInstagram className="icon"/>
+                        <FaTripadvisor className="icon"/>
                     </div>
 
                     <div className="leftIcons">
-                        <BsListUl />
-                        <TbApps />
+                        <BsListUl className="icon"/>
+                        <TbApps className="icon"/>
                     </div>
                 </div>
             </div>
