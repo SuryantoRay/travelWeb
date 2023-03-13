@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './main.css';
 import './main.scss';
 import img from '../../Assets/Gambar/img1.jpeg';
@@ -17,6 +17,9 @@ import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { HiClipboardCheck } from 'react-icons/hi';
 // data 
 
+import Aos from 'aos';
+import 'aos/dist/aos.css'; 
+
 const data = [
     {
         id: 1,
@@ -24,7 +27,7 @@ const data = [
         destTitle: 'Goa Jomblang',
         location: 'Jawa Tengah',
         grade: 'Wisata Goa',
-        fees: 'Rp. 500.000.00',
+        fees: 'Rp. 500.000',
         desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
@@ -34,8 +37,9 @@ const data = [
         destTitle: 'Candi Borobudur',
         location: 'Jawa Tengah',
         grade: 'Wisata Kebudayaan',
-        fees: 'Rp. 50.000.00',
-        desctiption: 'Kemegahan dan sejarah Candi Borobudur telah dikenal dunia sejak lama. UNESCO bahkan menetapkan Borobudur sebagai warisan dunia pada 1991. Kamu bisa mengunjunginya sebelum subuh untuk menyaksikan sisi lain keindahan Borobudur.',
+        fees: 'Rp. 50.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
+
     },
 
     {
@@ -44,8 +48,8 @@ const data = [
         destTitle: 'Candi Prambanan',
         location: 'Yogyakarta',
         grade: 'Wisata Kebudayaan',
-        fees:'Rp. 50.000.00',
-        desctiption: 'Sama seperti Borobudur, nilai sejarah dan arsitektur membuat candi Prambanan masuk sebagai warisan dunia pada 1991 oleh UNESCO. Kamu juga bisa menyaksikan pertunjukan sendratari Ramayana.',
+        fees:'Rp. 50.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     { 
@@ -54,8 +58,8 @@ const data = [
         destTitle: 'Kawah Ijen',
         location: 'Jawa Timur',
         grade: 'Wisata Gunung',
-        fees: 'Rp. 7.500.00',
-        desctiption: 'Bergeser ke Jawa Timur, kawah yang berada di Banyuwangi ini termasuk tempat wisata yang mendunia. Selain keindahan kawahnya, Kawah Ijen dikenal karena fenomena alam Api Biru yang hanya bisa dilihat saat malam hari. Fenomena api biru hanya ada dua di dunia, Islandia dan Indonesia.',
+        fees: 'Rp. 7.500',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -64,8 +68,8 @@ const data = [
         destTitle: 'Gunung Bromo', 
         location: 'Malang',
         grade: 'Wisata Gunung',
-        fees: 'Rp. 35.000.00',
-        desctiption: 'Negeri di atas awan mungkin ungkapan yang tepat menggambarkan pemandangan Bromo. Selain melihat megahnya gunung Bromo dari ketinggian, kamu juga bisa melihat kawah Bromo.',
+        fees: 'Rp. 35.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -74,8 +78,8 @@ const data = [
         destTitle: 'Green Canyon Cukang Taneuh',
         location: 'Jawa Barat',
         grade: 'Wisata Laut',
-        fees: 'Rp. 200.000.00',
-        desctiption: 'Cukang Taneuh yang berada di Pangandaran, Jawa Barat ini disebut sebagai Grand Canyon-nya Indonesia. Di sini kamu bisa menikmati keindahan batu karang dengan sungai berkelok dan dipadati tumbuhan hijau sambil body rafting.',
+        fees: 'Rp. 200.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -84,8 +88,8 @@ const data = [
         destTitle: 'Air Terjun Tumpak Sewu',
         location: 'Jawa Timur',
         grade: 'Wisata Air Terjun',
-        fees: 'Rp. 10.000.00',
-        desctiption: 'Disebut sebagai air terjun Niagaranya Jawa Timur, air terjun Tumpak Sewu dikenal dunia berkat media sosial Instagram yang banyak membagikan keindahan air terjun Tumpak Sewu dari berbagai sisi.',
+        fees: 'Rp. 10.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -94,8 +98,8 @@ const data = [
         destTitle: 'Ubud',
         location: 'Bali',
         grade: 'Wisata Budaya', 
-        fees: 'Rp. 60.000.00',
-        desctiption: 'Disebut sebagai jantung Bali, Ubud mendunia karena kaya akan seni, sejarah, dan keindahan alamnya. Banyak lokasi wisata alam yang bisa Kamu jelajahi di Ubud.',
+        fees: 'Rp. 60.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -104,8 +108,8 @@ const data = [
         destTitle: 'Taman Nasional Bali Barat',
         location: 'Bali',
         grade: 'Wisata Alam',
-        fees: 'Rp. 15.000.00',
-        desctiption: 'Taman nasional bali barat memiliki beberapa jenis hutan, sabana, dan pantai. Baik darat dan lautnya layak kamu eksplor, termasuk Pulau Menjangan.',
+        fees: 'Rp. 15.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -114,8 +118,8 @@ const data = [
         destTitle: 'Labuan Bojo',
         location: 'Nusa Tenggara Timur',
         grade: 'Wisata Alam',
-        fees: 'Rp. 150.000.00',
-        desctiption: 'Labuan Bajo dengan Taman Nasional Komodonya telah mendunia sejak lama. Pulau Labuan Bajo sendiri memiliki tempat wisata menarik seperti Goa Batu Cermin, Air Terjun Cunca Wulang, Wae Rebo, Sawah Lingko, Gua Rangko, Pulau Padar, Pink Beach, Pulau Komodo.',
+        fees: 'Rp. 150.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -125,7 +129,7 @@ const data = [
         location: 'Sumatera',
         grade: 'Wisata Alam',
         fees: 'Rp. 550.000', 
-        desctiption: 'Tangkahan eco park merupakan bagian dari kawasan Taman Nasional Gunung Leuser. Pamornya yang mendunia disebut wisatawan asing sebagai The Hidden Paradise of Sumatera. Kamu bisa melihat penangkaran gajah dan bermain di alam.',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 
     {
@@ -134,16 +138,22 @@ const data = [
         destTitle: 'Danau Toba',
         location: 'Sumatera Utara',
         grade: 'Wisata Alam',
-        fees: 'Rp. 50.000.00',
-        desctiption: 'Danau yang terbentuk dari letusan gunung berapi menjadi ikon bagi wisata Sumatera. Danau alami yang terletak di dataran tinggi dengan pulau vulkanik di tengahnya, yakni pulau Samosir.',
+        fees: 'Rp. 50.000',
+        desctiption: 'Goa Jomblang termasuk salah satu wisata ikonik di Jawa Tengah. Di wisata ini Kamu akan diajak turun ke perut bumi sedalam 80 meter. Turunnya pun terbilang menantang, pasalnya bukan turun dengan tangga melainkan teknik tali tunggal berbekal keamanan lengkap. Tidak hanya itu, yang menjadikan tempat ini begitu dikenal di dunia adalah masuk dan jatuhnya cahaya matahari dari celah-celah dan lubang goa sehingga menciptakan keindahan alami yang menakjubkan.',
     },
 ]
 
 const Main = () => {
+    // effect
+    useEffect(() => {
+        Aos.init({duration: 2000})
+    }, [])
+
+
     return (
         <section className="main container section">
             <div className="secTitle">
-                <h3 className="title">
+                <h3 data-aos="fade-right" className="title">
                     Most visited destinations
                 </h3>
             </div>
@@ -152,7 +162,7 @@ const Main = () => {
                 {
                     data.map(({ id, imgSrc, destTitle, location, grade, fees, desctiption }) => {
                         return (
-                            <div key={id} className="singleDestination">
+                            <div key={id} data-aos="fade-up" className="singleDestination">
 
                                 <div className="imageDiv">
                                     <img src={imgSrc} alt={destTitle} />
