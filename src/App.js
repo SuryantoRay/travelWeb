@@ -1,18 +1,18 @@
 import React from "react";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import "./App.css";
-import Home from "./Components/Home/Home";
-import Main from "./Components/Main/Main";
-import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Components/Footer/Footer";
+import About from "./Components/About/About";
+import Dashboard from "./Components/Dashboard/Dashboard";
+
 
 const App = () => {
     return (
-        <>
-        <Navbar />
-        <Home />
-        <Main />
-        <Footer />
-        </>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Dashboard />}></Route>
+                <Route path="/about" element={<About />}></Route>
+            </Routes>
+        </Router>
     )
 }
 
